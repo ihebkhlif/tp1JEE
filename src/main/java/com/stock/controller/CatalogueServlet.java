@@ -21,13 +21,10 @@ public class CatalogueServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 1. Call Service (which calls DAO)
         List<Produit> maListe = service.getCatalogue();
 
-        // 2. Put data in the request "envelope"
         request.setAttribute("listeProduits", maListe);
 
-        // 3. Forward to the protected JSP
         request.getRequestDispatcher("/WEB-INF/vues/catalogue.jsp").forward(request, response);
     }
 }
