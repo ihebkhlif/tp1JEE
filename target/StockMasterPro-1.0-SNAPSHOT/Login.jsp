@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head><title>Login StockMaster Pro</title></head>
@@ -8,5 +9,13 @@
     Mot de passe: <input type="password" name="pass"><br>
     <input type="submit" value="Se connecter">
 </form>
+<%
+    String error =request.getParameter("error");
+    if (error != null){
+%>
+<p style="color:red;"><%= error %></p>
+<%
+}
+%>
 </body>
 </html>
