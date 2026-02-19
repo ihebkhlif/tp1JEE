@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", "admin");
             response.sendRedirect(request.getContextPath() + "/catalogue");
         } else {
-            response.sendRedirect("Login.jsp");
+            response.sendRedirect(request.getContextPath() + "/Login.jsp");
         }
     }
 

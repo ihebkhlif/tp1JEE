@@ -8,6 +8,11 @@
 </head>
 <body>
 <h2>Utilisateur connecté : ${sessionScope.user}</h2>
+<!-- Partie4 -->
+<c:if test="${not empty lastVisit}">
+  <p>Dernière visite : ${lastVisit}</p>
+</c:if>
+
 <h2>Liste des Produits</h2>
 
 <table border="1">
