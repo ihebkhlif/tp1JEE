@@ -1,7 +1,9 @@
 package com.stock.controller;
 
 import com.stock.model.Produit;
+import com.stock.service.IStockService;
 import com.stock.service.ProduitService;
+import com.stock.service.impl.StockServiceImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,13 +18,13 @@ import java.util.List;
 
 
 public class CatalogueServlet extends HttpServlet {
-    private ProduitService service = new ProduitService();
+    private IStockService service = new StockServiceImpl();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         // 1. Call Service (which calls DAO)
-        List<Produit> maListe = service.getCatalogue();
+        List<Produit> maListe = service.recupererCatalogueFiltre();
 
         // 2. Put data in the request "envelope"
         request.setAttribute("listeProduits", maListe);

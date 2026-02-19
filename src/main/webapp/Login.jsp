@@ -1,4 +1,5 @@
-
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head><title>Login StockMaster Pro</title></head>
@@ -17,5 +18,10 @@
 <%
 }
 %>
+<c:if test="${not empty filterMessage}">
+    <div>${filterMessage}</div>
+</c:if>
+
+
 </body>
 </html>

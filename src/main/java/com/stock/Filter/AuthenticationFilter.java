@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebFilter("/catalogue")
+@WebFilter("/*")
 public class AuthenticationFilter implements Filter {
+
+    private static final String USER_SESSION_KEY = "user";
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -18,15 +20,35 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
+        String path = req.getRequestURI();
+        String contextPath = req.getContextPath();
+
         HttpSession session = req.getSession(false);
+        boolean loggedIn = (session != null && session.getAttribute(USER_SESSION_KEY) != null);
 
-        if (session != null && session.getAttribute("user") != null) {
+        boolean loginPage = path.endsWith("Login.jsp");
+        boolean loginServlet = path.endsWith("/connexion");
 
+        // Allow login page + login servlet
+        if (loginPage || loginServlet) {
+            if (loggedIn) {
+                // if Logged in
+                resp.sendRedirect(req.getContextPath() + "/");
+                return;
+            }
             chain.doFilter(request, response);
-
-        } else {
-
-            resp.sendRedirect("Login.jsp?error=Please login first");
+            return;
         }
+        if (path.equals(req.getContextPath() + "/")) {
+            chain.doFilter(request, response);
+            return;
+        }
+        // Block protected pages
+        if (!loggedIn) {
+            resp.sendRedirect(contextPath + "/Login.jsp");
+            return;
+        }
+
+        chain.doFilter(request, response);
     }
 }
