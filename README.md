@@ -14,10 +14,9 @@ stock-inventory-management/
 ├── pom.xml                       # Maven configuration
 ├── mvnw & mvnw.cmd               # Maven wrapper scripts
 ├── src/
-│   ├── main/
-│   │   ├── java/com/stock/       # Java source code
-│   │   └── webapp/               # Web resources (if applicable)
-│   └── test/                     # Test files
+│   └── main/
+│       ├── java/                 # Java source code
+│       └── webapp/               # Web resources
 ├── .mvn/                         # Maven configuration directory
 └── target/                       # Compiled output (generated)
 ```
@@ -69,22 +68,11 @@ Using Maven directly:
 maven clean install
 ```
 
-### Run Tests
-
-```bash
-mvnw test
-```
-
-Or:
-```bash
-./mvnw test
-```
-
 ## 📝 Notes
 
 - Project uses Maven wrapper (`mvnw`) for platform-independent builds
 - Outputs a WAR file for deployment on application servers (Tomcat, etc.)
-- JUnit 5 configured for unit testing
+- JUnit 5 configured for testing
 
 ---
 
